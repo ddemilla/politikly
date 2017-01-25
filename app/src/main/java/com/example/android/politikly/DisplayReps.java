@@ -34,7 +34,7 @@ public class DisplayReps extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_reps);
 
-        final CheckBox checkBox = (CheckBox) findViewById(R.id.checkbox_cream);
+        final CheckBox checkBox = (CheckBox) findViewById(R.id.checkbox_contact_info);
         if (checkBox.isChecked()) {
             checkBox.setChecked(false);
         }
@@ -45,11 +45,8 @@ public class DisplayReps extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        CheckBox iceCreamCheckBox = (CheckBox) findViewById(R.id.checkbox_cream);
-        boolean hasWhippedCream = iceCreamCheckBox.isChecked();
-
-        CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.checkbox_chocolate);
-        boolean hasChocolate = chocolateCheckBox.isChecked();
+        CheckBox contactInfoCheckBox = (CheckBox) findViewById(R.id.checkbox_contact_info);
+        boolean returnContactInfo = contactInfoCheckBox.isChecked();
 
         EditText nameText = (EditText) findViewById(R.id.name);
         String name = nameText.getText().toString();
@@ -107,7 +104,7 @@ public class DisplayReps extends AppCompatActivity {
         DistrictAsyncTask getDistrictTask = new DistrictAsyncTask();
         getDistrictTask.execute(url);
 
-        String priceMessage = createOrderSummary(hasWhippedCream, hasChocolate, name, longitude, latitude);
+        String priceMessage = createOrderSummary(returnContactInfo, name, longitude, latitude);
 
 //        Intent intent = new Intent(Intent.ACTION_SENDTO);
 //        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
@@ -120,7 +117,7 @@ public class DisplayReps extends AppCompatActivity {
 //        displayMessage(priceMessage);
     }
 
-    public String createOrderSummary(boolean hasWhippedCream, boolean hasChocolate, String name, double longitude, double latitude) {
+    public String createOrderSummary(boolean returnContactInfo, String name, double longitude, double latitude) {
         return "Name: " + name + "\nLongitude " + longitude + "\nLatitude: " + latitude ;
     }
 
@@ -138,14 +135,6 @@ public class DisplayReps extends AppCompatActivity {
         return base_url;
     };
 
-    /**
-     * This method displays the given quantity value on the screen.
-     */
-    private void display(int number) {
-        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText("" + number);
-    }
-
 
     private int calculatePrice(boolean hasWhippedCream, boolean hasChocolate) {
         int price = 5;
@@ -157,20 +146,6 @@ public class DisplayReps extends AppCompatActivity {
             price += 2;
         }
         return price * quantity;
-    }
-
-    public void increment(View view) {
-        if (quantity < 100) {
-            quantity = quantity + 1;
-        }
-        display(quantity);
-    }
-
-    public void decrement(View view) {
-        if (quantity > 1) {
-            quantity = quantity - 1;
-        }
-        display(quantity);
     }
 
     /**
