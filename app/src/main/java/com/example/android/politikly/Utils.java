@@ -194,9 +194,15 @@ public final class Utils {
             JSONArray results = root.getJSONArray("objects");
             JSONObject firstElement = results.getJSONObject(0);
             JSONObject person = firstElement.getJSONObject("person");
-            String name = person.getString("name");
+            String firstName = person.getString("firstname");
+            String lastName = person.getString("lastname");
+            String name = firstName + " " + lastName;
 
-            return new Representative(name);
+            String party = firstElement.getString("party");
+            String description = firstElement.getString("description");
+            String website = firstElement.getString("website");
+
+            return new Representative(name, party, description, website);
 
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Problem parsing the earthquake JSON results", e);

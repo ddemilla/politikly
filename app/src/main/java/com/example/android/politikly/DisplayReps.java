@@ -104,7 +104,7 @@ public class DisplayReps extends AppCompatActivity {
         DistrictAsyncTask getDistrictTask = new DistrictAsyncTask();
         getDistrictTask.execute(url);
 
-        String priceMessage = createOrderSummary(returnContactInfo, name, longitude, latitude);
+//        String summaryMessage = createRepSummary(name);
 
 //        Intent intent = new Intent(Intent.ACTION_SENDTO);
 //        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
@@ -114,11 +114,11 @@ public class DisplayReps extends AppCompatActivity {
 //            startActivity(intent);
 //        }
 
-//        displayMessage(priceMessage);
+//        displayMessage(summaryMessage);
     }
 
-    public String createOrderSummary(boolean returnContactInfo, String name, double longitude, double latitude) {
-        return "Name: " + name + "\nLongitude " + longitude + "\nLatitude: " + latitude ;
+    public String createRepSummary(String name) {
+        return "Name: " + name + "\nLongitude ";
     }
 
     public String getDistrictUrl(String longitude, String latitude){
@@ -135,18 +135,6 @@ public class DisplayReps extends AppCompatActivity {
         return base_url;
     };
 
-
-    private int calculatePrice(boolean hasWhippedCream, boolean hasChocolate) {
-        int price = 5;
-        if (hasWhippedCream) {
-            price += 1;
-        }
-
-        if (hasChocolate) {
-            price += 2;
-        }
-        return price * quantity;
-    }
 
     /**
      * This method displays the given text on the screen.
@@ -199,7 +187,9 @@ public class DisplayReps extends AppCompatActivity {
                 return;
             }
 
-            displayMessage(result.representative);
+            String message = result.representative + " (" + result.party + ")" + "\n"
+                    + result.description + "\n" + result.website;
+            displayMessage(message);
         }
     }
 }

@@ -22,14 +22,19 @@ public class Representative {
 
     /** Title of the earthquake event */
     public final String representative;
-
+    public final String party;
+    public final String description;
+    public final String website;
 
     /**
      * Constructs a new {@link District}.
      *
      * @param eventRep is the title of the earthquake event
      */
-    public Representative(String eventRep) {
+    public Representative(String eventRep, String eventParty, String eventDescription, String eventWebsite) {
         representative = eventRep;
+        party = eventParty;
+        description = eventDescription;
+        website = eventWebsite;
     }
 }
