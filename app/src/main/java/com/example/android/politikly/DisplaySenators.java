@@ -1,10 +1,15 @@
+package com.example.android.politikly;
+
+/**
+ * Created by danieldemillard on 2/5/17.
+ */
+
 /**
  * Add your package below. Package name can be found in the project's AndroidManifest.xml file.
  * This is the package name our example uses:
  *
  * package com.example.android.justjava;
  */
-package com.example.android.politikly;
 
 import android.Manifest;
 import android.content.Context;
@@ -17,57 +22,43 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
 
-/**
- * This app displays an order form to order coffee.
- */
-public class DisplayReps extends AppCompatActivity {
+public class DisplaySenators extends AppCompatActivity {
 
     int quantity = 1;
 
     //    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_reps);
+        setContentView(R.layout.activity_display_senators);
 
         final CheckBox checkBox = (CheckBox) findViewById(R.id.checkbox_contact_info);
         if (checkBox.isChecked()) {
             checkBox.setChecked(false);
         }
 
-    }
-
-    /**
-     * This method is called when the order button is clicked.
-     */
-    public void submitOrder(View view) {
         CheckBox contactInfoCheckBox = (CheckBox) findViewById(R.id.checkbox_contact_info);
         boolean returnContactInfo = contactInfoCheckBox.isChecked();
 
-        EditText nameText = (EditText) findViewById(R.id.name);
-        String name = nameText.getText().toString();
-
-//        if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+//        if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
 //            displayMessage("NO permissions");
 //            Log.v("Error","This is true");
 //        }
 
-        int permissionCheck = ContextCompat.checkSelfPermission(DisplayReps.this,
-                Manifest.permission.ACCESS_FINE_LOCATION);
-
-        Log.v("permission", Integer.toString(permissionCheck));
-
-        // Here, thisActivity is the current activity
-//        if (ContextCompat.checkSelfPermission(DisplayReps.this,
+//        int permissionCheck = ContextCompat.checkSelfPermission(DisplaySenators.this,
+//                Manifest.permission.ACCESS_FINE_LOCATION);
+//
+//        Log.v("permission", Integer.toString(permissionCheck));
+//
+//        // Here, thisActivity is the current activity
+//        if (ContextCompat.checkSelfPermission(DisplaySenators.this,
 //                Manifest.permission.ACCESS_FINE_LOCATION)
 //                != PackageManager.PERMISSION_GRANTED) {
 //
 //            // Should we show an explanation?
-//            if (ActivityCompat.shouldShowRequestPermissionRationale(DisplayReps.this,
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(DisplaySenators.this,
 //                    Manifest.permission.ACCESS_FINE_LOCATION)) {
 //
 //                // Show an explanation to the user *asynchronously* -- don't block
@@ -78,7 +69,7 @@ public class DisplayReps extends AppCompatActivity {
 //
 //                // No explanation needed, we can request the permission.
 //
-//                ActivityCompat.requestPermissions(DisplayReps.this,
+//                ActivityCompat.requestPermissions(DisplaySenators.this,
 //                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
 //                        1);
 //
@@ -87,19 +78,7 @@ public class DisplayReps extends AppCompatActivity {
 //                // result of the request.
 //            }
 //        }
-
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-//        String summaryMessage = createRepSummary(name);
-
-//        Intent intent = new Intent(Intent.ACTION_SENDTO);
-//        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-//        intent.putExtra(Intent.EXTRA_SUBJECT, "Just Java order for " + name);
-//        intent.putExtra(Intent.EXTRA_TEXT, priceMessage);
-//        if (intent.resolveActivity(getPackageManager()) != null) {
-//            startActivity(intent);
-//        }
-
-//        displayMessage(summaryMessage);
     }
 
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
@@ -125,8 +104,6 @@ public class DisplayReps extends AppCompatActivity {
                     getDistrictTask.execute(url);
 
                 } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
                     displayMessage("You must provide access to your location.");
                 }
                 return;
@@ -149,7 +126,7 @@ public class DisplayReps extends AppCompatActivity {
 
     public String getRepUrl(String district, String state){
         String base_url = "https://www.govtrack.us/api/v2/role?current=true";
-        base_url += "&district=" + district + "&state=" + state;
+        base_url += "&state=" + state + "&role_type=senator";
 
         return base_url;
     };
@@ -159,7 +136,7 @@ public class DisplayReps extends AppCompatActivity {
      * This method displays the given text on the screen.
      */
     private void displayMessage(String message) {
-        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
+        TextView orderSummaryTextView = (TextView) findViewById(R.id.senator_summary);
         orderSummaryTextView.setText(message);
     }
 
