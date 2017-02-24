@@ -28,6 +28,16 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
+            android:name=".MyIssues"
+            android:label="MyIssues"
+            android:parentActivityName=".MainActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
             android:name=".DisplaySenators"
             android:label="Senators"
             android:parentActivityName=".MainActivity">
