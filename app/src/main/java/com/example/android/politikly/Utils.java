@@ -210,46 +210,46 @@ public final class Utils {
         return null;
     }
 
-    public String loadJSONFromAsset() {
-        String json = null;
-        try {
-            InputStream is = getAssets().open("yourfilename.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
+//    public String loadJSONFromAsset() {
+//        String json = null;
+//        try {
+//            InputStream is = getAssets().open("yourfilename.json");
+//            int size = is.available();
+//            byte[] buffer = new byte[size];
+//            is.read(buffer);
+//            is.close();
+//            json = new String(buffer, "UTF-8");
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//            return null;
+//        }
+//        return json;
+//    }
 
-    private static ScotusJudge extractScotusFromJson(String repJSON) {
-        // If the JSON string is empty or null, then return early.
-        if (TextUtils.isEmpty(repJSON)) {
-            return null;
-        }
-
-        try {
-            JSONObject root = new JSONObject(repJSON);
-            JSONArray results = root.getJSONArray("objects");
-            JSONObject firstElement = results.getJSONObject(0);
-            JSONObject person = firstElement.getJSONObject("person");
-            String firstName = person.getString("firstname");
-            String lastName = person.getString("lastname");
-            String name = firstName + " " + lastName;
-
-            String party = firstElement.getString("party");
-            String description = firstElement.getString("description");
-            String website = firstElement.getString("website");
-
-            return new ScotusJudge(name, party, description, website);
-
-        } catch (JSONException e) {
-            Log.e(LOG_TAG, "Problem parsing the earthquake JSON results", e);
-        }
-        return null;
-    }
+//    private static ScotusJudge extractScotusFromJson(String repJSON) {
+//        // If the JSON string is empty or null, then return early.
+//        if (TextUtils.isEmpty(repJSON)) {
+//            return null;
+//        }
+//
+//        try {
+//            JSONObject root = new JSONObject(repJSON);
+//            JSONArray results = root.getJSONArray("objects");
+//            JSONObject firstElement = results.getJSONObject(0);
+//            JSONObject person = firstElement.getJSONObject("person");
+//            String firstName = person.getString("firstname");
+//            String lastName = person.getString("lastname");
+//            String name = firstName + " " + lastName;
+//
+//            String party = firstElement.getString("party");
+//            String description = firstElement.getString("description");
+//            String website = firstElement.getString("website");
+//
+//            return new ScotusJudge(name, party, description, website);
+//
+//        } catch (JSONException e) {
+//            Log.e(LOG_TAG, "Problem parsing the earthquake JSON results", e);
+//        }
+//        return null;
+//    }
 }
