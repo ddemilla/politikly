@@ -27,7 +27,7 @@ public class Representative {
     public final String website;
 
     /**
-     * Constructs a new {@link District}.
+     * Constructs a new {@link Representative}.
      *
      * @param eventRep is the title of the earthquake event
      */
